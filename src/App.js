@@ -3,6 +3,7 @@ import './App.css';
 import AddWord from "./components/AddWord";
 import Game from "./components/Game";
 import Nav from "./components/Nav";
+import {Route, Routes} from "react-router-dom";
 
 
 function App() {
@@ -10,9 +11,12 @@ function App() {
         <div className="App">
             <Nav/>
             <div className="routes_wrapper">
-                <AddWord/>
+                <Routes>
+                    <Route path='/' element={<AddWord/>}/>
+                    <Route path='/game' element={<Game/>}/>
+                </Routes>
             </div>
-            <Game/>
+            {/*<Game/>*/}
 
 
         </div>

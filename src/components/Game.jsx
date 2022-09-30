@@ -1,5 +1,7 @@
 import React, {useState} from 'react';
 import {useSelector} from "react-redux";
+import Result from "./Result";
+import Attention from "./Attention";
 
 const Game = () => {
     const addWords = useSelector((state => {
@@ -11,7 +13,6 @@ const Game = () => {
         return reducers.word;
     });
     const [step, setStep] = useState(0);
-
     const nextQuestion = () => {
         if (step >= 0) {
             setStep(step + 1);
@@ -20,16 +21,15 @@ const Game = () => {
             alert('add more words')
         }
     }
-    console.log('rightAnswer', rightAnswer)
     const [correct, setCorrect] = useState(0);
 
+    //random index selection
     function shuffle(array) {
         let i = array.length,
             j = 0,
             temp;
         while (i--) {
             j = Math.floor(Math.random() * (i + 1));
-            // swap randomly chosen element with current element
             temp = array[i];
             array[i] = array[j];
             array[j] = temp;
@@ -37,40 +37,43 @@ const Game = () => {
         return array;
     }
 
-    const percentage = Math.round(step / rightAnswer.length * 100);
-    console.log(percentage)
-    console.log('step', step)
+    //Array of words to indexes array
     let wordsIndexes = Array.from(rightAnswer.keys());
+    //randomize indexes of arrray
     let ranNums = shuffle(wordsIndexes);
-    console.log(ranNums)
+    const index = ranNums[step];
+    //status bar
+    const percentage = Math.round(step / rightAnswer.length * 100);
     return (
         <div className='game-wrapper'>
             <div className="answers-wrapper">
                 {<p>{step + 1} / {rightAnswer.length}</p>}
                 <div className="answer">
-
                     <div style={{width: `${percentage}%`}} className="progress__inner">s</div>
 
-                    <h1>Choose right translation
-                        of {rightAnswer[step] !== undefined ? rightAnswer[step].word : 's'}  </h1>
-                    {rightAnswer[0] === undefined ? 'add some words to library' :
+                    {rightAnswer[0] === undefined ? <Attention  text='Add some words to library'/> :
                         <div>
-                            {step > rightAnswer.length ? 'results' :
-                                <ul className='answer-list'>
-                                    <li onClick={nextQuestion} className='answer-item'>
-                                        {rightAnswer[ranNums[step]].translate.charAt(0).toUpperCase() + rightAnswer[ranNums[step]].word.slice(1)}
-                                    </li>
-                                    {
-                                        addWords.slice(step * 3, step * 3 + 3).map((el, index) => <li
-                                            onClick={nextQuestion}
-                                            className='answer-item'>
-                                            {el.charAt(0).toUpperCase() + el.slice(1)}
-                                        </li>)
-                                    }
-                                </ul>
+
+                            {ranNums[step] === undefined ? <Result correct={correct} length={rightAnswer.length}/> :
+                                <div>
+                                    <h1>Choose right translation
+                                        of {rightAnswer[step] !== undefined ? rightAnswer[ranNums[step]].word : 's'}  </h1>
+                                    <ul className='answer-list'>
+
+                                        <li onClick={nextQuestion} className='answer-item'>
+                                            {rightAnswer[ranNums[step]].translate.charAt(0).toUpperCase() + rightAnswer[ranNums[step]].word.slice(1)}
+                                        </li>
+                                        {
+                                            addWords.slice(step * 3, step * 3 + 3).map((el, index) => <li
+                                                onClick={nextQuestion}
+                                                className='answer-item'>
+                                                {el.charAt(0).toUpperCase() + el.slice(1)}
+                                            </li>)
+                                        }
+                                    </ul>
+                                </div>
                             }
                         </div>}
-                    <p>{correct}</p>
                 </div>
             </div>
         </div>
