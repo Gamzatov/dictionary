@@ -16,10 +16,14 @@ const Game = () => {
     const nextQuestion = () => {
         if (step >= 0) {
             setStep(step + 1);
+            setCorrect(correct + 1)
         }
         if (step > rightAnswer.length) {
             alert('add more words')
         }
+    };
+    const wrongAnswer = () => {
+        setStep(step + 1);
     }
     const [correct, setCorrect] = useState(0);
 
@@ -47,16 +51,15 @@ const Game = () => {
     return (
         <div className='game-wrapper'>
             <div className="answers-wrapper">
-                {<p>{step + 1} / {rightAnswer.length}</p>}
+
                 <div className="answer">
-                    <div style={{width: `${percentage}%`}} className="progress__inner">s</div>
 
-                    {rightAnswer[0] === undefined ? <Attention  text='Add some words to library'/> :
+                    {rightAnswer[0] === undefined ? <Attention  text='There no anything to repeat. Add some words to library'/> :
                         <div>
-
+                            <div style={{width: `${percentage}%`}} className="progress__inner"></div>
                             {ranNums[step] === undefined ? <Result correct={correct} length={rightAnswer.length}/> :
                                 <div>
-                                    <h1>Choose right translation
+                                    <h1 className='title'>Choose right translation
                                         of {rightAnswer[step] !== undefined ? rightAnswer[ranNums[step]].word : 's'}  </h1>
                                     <ul className='answer-list'>
 
@@ -65,7 +68,7 @@ const Game = () => {
                                         </li>
                                         {
                                             addWords.slice(step * 3, step * 3 + 3).map((el, index) => <li
-                                                onClick={nextQuestion}
+                                                onClick={wrongAnswer}
                                                 className='answer-item'>
                                                 {el.charAt(0).toUpperCase() + el.slice(1)}
                                             </li>)

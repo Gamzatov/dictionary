@@ -5,7 +5,7 @@ import {Link, NavLink} from "react-router-dom";
 const Nav = () => {
     return (
         <div className="nav_tabs">
-            <div>
+            <div className='tab'>
                 <NavLink className={({isActive}) => (isActive ? 'active-tab' : 'tab')} to='/'>
                     <div className="link-wrapper">
                         <div className="link-item">
@@ -23,7 +23,7 @@ const Nav = () => {
                     </div>
                 </NavLink>
             </div>
-            <div>
+            <div className='tab'>
                 <NavLink className={({isActive}) => (isActive ? 'active-tab' : 'tab')} to='/game'>
                     <div className="link-wrapper">
                         <div className="link-item">

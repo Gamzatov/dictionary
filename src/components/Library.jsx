@@ -1,5 +1,6 @@
 import React from 'react';
 import {useSelector} from "react-redux";
+import Attention from "./Attention";
 
 const Library = () => {
     const words = useSelector(state => {
@@ -9,7 +10,7 @@ const Library = () => {
     console.log(words)
     return (
         <div className='library_wrapper'>
-            <h3>Words/translations</h3>
+          <Attention text='Words | Translations'/>
             {
                 words.length !== 0 ? words.map((el) =>
                     <div className="element">
@@ -19,7 +20,7 @@ const Library = () => {
                         <div className="translate">
                             {el.translate.charAt(0).toUpperCase() + el.translate.slice(1)}
                         </div>
-                    </div>) : <div className='empty_library_wrapper'><h1> There any words yet...</h1></div>
+                    </div>) : <Attention text='There any words yet...'/>
             }
         </div>
     );
