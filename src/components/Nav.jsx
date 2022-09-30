@@ -6,7 +6,7 @@ const Nav = () => {
     return (
         <div className="nav_tabs">
             <div className='tab'>
-                <NavLink className={({isActive}) => (isActive ? 'active-tab' : 'tab')} to='/'>
+                <NavLink className={({isActive}) => (isActive ? 'active-tab' : 'tab')} to='dictionary/'>
                     <div className="link-wrapper">
                         <div className="link-item">
                             <svg width="46" height="46" fill="none" stroke="currentColor" stroke-linecap="round"

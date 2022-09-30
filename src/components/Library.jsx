@@ -7,7 +7,6 @@ const Library = () => {
         const {reducers} = state;
         return reducers.word
     });
-    console.log(words)
     return (
         <div className='library_wrapper'>
           <Attention text='Words | Translations'/>

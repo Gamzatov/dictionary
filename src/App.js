@@ -12,7 +12,7 @@ function App() {
             <Nav/>
             <div className="routes_wrapper">
                 <Routes>
-                    <Route path='/' element={<AddWord/>}/>
+                    <Route path='dictionary/' element={<AddWord/>}/>
                     <Route path='/game' element={<Game/>}/>
                 </Routes>
             </div>

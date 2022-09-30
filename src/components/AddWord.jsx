@@ -7,7 +7,6 @@ const AddWord = () => {
     const [word, setWord] = React.useState('');
     const [translate, setTranslate] = React.useState('');
     const dispatch = useDispatch();
-
     const handleWordInput = (e) => {
         setWord(e.target.value);
         console.log(e.target.value)
@@ -25,7 +24,6 @@ const AddWord = () => {
         setWord('');
         setTranslate('');
     }
-
     console.log(wordsArray);
     return (
         <div>
@@ -33,10 +31,10 @@ const AddWord = () => {
                 <form className='wordForm' onSubmit={handleSubmit}>
                     <div className="input_wrapper">
                         <div className="wordInput">
-                            <input placeholder='Word' value={word} onChange={handleWordInput} type="text"/>
+                            <input placeholder='Word' value={word} onChange={handleWordInput} type="text" required/>
                         </div>
                         <div className="wordInput">
-                            <input placeholder='Translate' value={translate} onChange={handleTranslateInput} type="text"/>
+                            <input placeholder='Translate' value={translate} onChange={handleTranslateInput} type="text" required/>
                         </div>
                     </div>
                     <button type='submit' className='sub_btn'>Add word</button>
