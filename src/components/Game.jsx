@@ -68,6 +68,7 @@ const Game = () => {
                                         </li>
                                         {
                                             addWords.slice(step * 3, step * 3 + 3).map((el, index) => <li
+                                                key={index}
                                                 onClick={wrongAnswer}
                                                 className='answer-item'>
                                                 {el.charAt(0).toUpperCase() + el.slice(1)}
