@@ -1,4 +1,4 @@
-import {ADD_WORD} from "../actions/actions";
+import {ADD_WORD, DELETE_WORD} from "../actions/actions";
 
 const initialState = {
     word: [],
@@ -15,7 +15,9 @@ export const reducers = (state = initialState, action) => {
 
             }
         }
+
         default:
             return state;
     }
+
 }
